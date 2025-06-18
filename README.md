@@ -211,7 +211,7 @@ const store = createStore(counterReducer);
 // Redux Toolkit setup
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-const counterSlice = createSlice({
+const counterState = createSlice({
   name: 'counter',
   initialState: { counter: 0, showCounter: true },
   reducers: {
@@ -227,11 +227,11 @@ const counterSlice = createSlice({
 });
 
 const store = configureStore({
-  reducer: counterSlice.reducer
+  reducer: counterState.reducer
 });
 
 // Export action creators
-export const counterActions = counterSlice.actions;
+export const counterActions = counterState.actions;
 ```
 
 ### Key Advantages of Redux Toolkit
@@ -248,7 +248,7 @@ As applications grow, it's common to split Redux state into multiple "slices" ma
 
 ```javascript
 // Multiple slices with Redux Toolkit
-const counterSlice = createSlice({
+const counterState = createSlice({
   name: 'counter',
   initialState: { counter: 0, showCounter: true },
   reducers: {
@@ -272,13 +272,13 @@ const authSlice = createSlice({
 // Combine slices in the store
 const store = configureStore({
   reducer: { 
-    counter: counterSlice.reducer, 
+    counter: counterState.reducer, 
     auth: authSlice.reducer 
   }
 });
 
 // Export actions
-export const counterActions = counterSlice.actions;
+export const counterActions = counterState.actions;
 export const authActions = authSlice.actions;
 ```
 
@@ -498,7 +498,7 @@ npm install @reduxjs/toolkit
 
 ### Step 2: Create Counter Slice
 
-Replace the separate actions and reducers with a single "slice" file `src/redux/slices/counterSlice.js`:
+Replace the separate actions and reducers with a single "slice" file `src/redux/slices/counterState.js`:
 
 ```javascript
 import { createSlice } from '@reduxjs/toolkit';
@@ -507,7 +507,7 @@ const initialState = {
   value: 0
 };
 
-export const counterSlice = createSlice({
+export const counterState = createSlice({
   name: 'counter',
   initialState,
   reducers: {
@@ -531,9 +531,9 @@ export const counterSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, reset, incrementByAmount } = counterSlice.actions;
+export const { increment, decrement, reset, incrementByAmount } = counterState.actions;
 
-export default counterSlice.reducer;
+export default counterState.reducer;
 ```
 
 ### Step 3: Update Redux Store
@@ -542,7 +542,7 @@ Replace `src/redux/store.js` with:
 
 ```javascript
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './slices/counterSlice';
+import counterReducer from './slices/counterState';
 
 export const store = configureStore({
   reducer: {
@@ -559,7 +559,7 @@ Update `src/App.jsx` to use the new action creators:
 
 ```javascript
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, reset, incrementByAmount } from './redux/slices/counterSlice';
+import { increment, decrement, reset, incrementByAmount } from './redux/slices/counterState';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';

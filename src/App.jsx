@@ -1,12 +1,13 @@
 import './App.css'
 import {useDispatch, useSelector} from "react-redux";
-import {decrement, increment, incrementByAmount, reset} from "./actions/counterActions.js";
+import {decrement, increment, reset, incrementByAmount, counterSelector} from "./counter.js";
 
 function App() {
 
-  const counterValue = useSelector(state => state.counter.value)
+  const counterValue = useSelector(counterSelector)
   const dispatch = useDispatch();
   const byValue = 5;
+
   return (
     <>
       <div className="card">
