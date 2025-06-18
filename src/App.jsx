@@ -1,6 +1,7 @@
 import './App.css'
 import {useDispatch, useSelector} from "react-redux";
-import {decrement, increment, reset, incrementByAmount, counterSelector} from "./counter.js";
+import {decrement, increment, reset, incrementByAmount, counterSelector} from "./counter/counter.js";
+import UserList from "./users/UserList.jsx";
 
 function App() {
 
@@ -19,6 +20,9 @@ function App() {
         <button onClick={() => dispatch(reset())}>Reset</button>
         <button onClick={() => dispatch(incrementByAmount(byValue))}>By value (5)</button>
       </div>
+        <div className="card">
+            <UserList />
+        </div>
     </>
   )
 }
