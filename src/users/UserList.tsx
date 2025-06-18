@@ -1,9 +1,11 @@
-import {useDispatch, useSelector} from "react-redux";
-import {fetchUsers, selectAllUser, selectUsersError, selectUsersStatus} from "./users";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers, selectAllUser, selectUsersError, selectUsersStatus } from "./users";
+import { AppDispatch } from "../store";
+import { User } from "../types";
 
-const UserList = () => {
-
-    const dispatch = useDispatch();
+const UserList: React.FC = () => {
+    const dispatch = useDispatch<AppDispatch>();
     const users = useSelector(selectAllUser);
     const status = useSelector(selectUsersStatus);
     const error = useSelector(selectUsersError);
@@ -13,21 +15,21 @@ const UserList = () => {
     console.log('Users:', users);
     console.log('Error:', error);
 
-  /*  useEffect(() => {
-        console.log("Starting effect");
-        if (status === 'idle') {
-            console.log("Fetching")
-            dispatch(fetchUsers())
-        }
-    }, [status, dispatch]);*/
+    /*  useEffect(() => {
+          console.log("Starting effect");
+          if (status === 'idle') {
+              console.log("Fetching")
+              dispatch(fetchUsers())
+          }
+      }, [status, dispatch]);*/
 
-    let content;
+    let content: React.ReactElement;
     if (status === 'loading') {
         content = <div>Loading...</div>;
     } else if (status === 'succeeded') {
         content = (
             <div className="user-list">
-                {users.map(user => (
+                {users.map((user: User) => (
                     <p key={user.id} className="user-item">
                         {user.name}
                     </p>
